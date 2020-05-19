@@ -14,8 +14,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
   $categoryid = htmlspecialchars($row['categoryid']);
   $category = htmlspecialchars($row['category']);
   $option_value .=  "<a href='/categorypage/categorypage.php?id=" . $categoryid . "'>" . strtoupper($category) . "</a>";
-
-
 }
 ?>
 
@@ -47,13 +45,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <span class="icon-bar bottom-bar"></span>
           </label>
 
-            <div class="search-form-wrapper">
-              <form id="search-form" action="" class="search-form">
-                <input type="text" name="search" id="search-Field" class="search-form__input-field" placeholder="Sök efter spel">
-                <button id="search_btn">Sök</button>
-              </form>
-              <div id="searched-result" class="search-result"></div>
-            </div>
+          <div class="search-form-wrapper">
+            <form id="search-form" action="" class="search-form">
+              <input type="text" name="search" id="search-Field" class="search-form__input-field" placeholder="Sök efter spel">
+              <button id="search_btn">Sök</button>
+            </form>
+            <div id="searched-result" class="search-result"></div>
+          </div>
 
           <ul class="menu-wraper__link-list">
 
@@ -73,17 +71,27 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               </div>
             </li>
             <li class="menu-wraper__link-item">
+              <a class="menu-wraper__links" href="/customer/login.php">LOGGA IN</a>
+            </li>
+            <li class="menu-wraper__link-item">
               <a class="menu-wraper__links" href="/admin/index.php">ADMIN</a>
             </li>
 
 
           </ul>
-            <div class="cart">
+          <!-- <div class="login">
+            <div class="login-wrapper">
+              <a class="menu-wraper__links" href="../order/orderpage.php"><img src="/images/login.png" class="login-img"></a>
+              <span class="counter" id="counter">0</span>
+            </div>
+          </div> -->
+
+          <div class="cart">
             <div class="cart-wrapper">
               <a class="menu-wraper__links" href="../order/orderpage.php"><img src="/images/cart.png" class="cart-img"></a>
               <span class="counter" id="counter">0</span>
-              </div>
             </div>
+          </div>
         </nav>
       </div>
 
@@ -91,4 +99,4 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
   </header>
 
-  <main >
+  <main>
