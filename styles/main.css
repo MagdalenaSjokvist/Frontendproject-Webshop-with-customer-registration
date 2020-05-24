@@ -774,8 +774,9 @@ input[type="checkbox"]:checked + label .bottom-bar {
 }
 
 .error {
-  color: red;
+  color: #f07715;
   padding: 1%;
+  margin: 5px 5px;
 }
 
 label {
@@ -800,8 +801,9 @@ label {
 .streetValidationText,
 .zipcodeValidationText,
 .cityValidationText {
-  color: red;
+  color: #f07715;
   font-weight: bolder;
+  margin: 5px 5px;
 }
 
 .frontpage_links {
@@ -968,6 +970,34 @@ label {
   .register-section {
     min-height: 1000px;
   }
+}
+
+.password-strength-meter {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  height: 1.5rem;
+  background: rgba(226, 226, 226, 0.733);
+  border: 0.5px solid #6b1d97;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+}
+
+@media (min-width: 500px) {
+  .password-strength-meter {
+    width: 30%;
+  }
+}
+
+.password-strength-meter::before {
+  color: white;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 10%;
+  border-radius: 10px;
+  background-color: #b852f4;
 }
 
 .product_container {

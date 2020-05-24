@@ -26,20 +26,17 @@ let isCityValid = false
 function validateName() {
 	let name = document.querySelector("#name").value
 	let infoText = document.querySelector(".nameValidationText")
-	// let spaceRegex = /\s/
 
 	if (name.length === 0) {
 		infoText.innerHTML = "OBS! Obligatoriskt fält"
 	} else if (new RegExp("[0-9]").test(name)) {
 		infoText.innerHTML = "OBS! Inga siffror tillåtna"
+	} else if (name.length < 2) {
+		infoText.innerHTML = "OBS! Namnet måste innehålla mer än 2 tecken"
 	} else if (!name.match(/\s/)) {
 		infoText.innerHTML = "OBS! Namnet måste innehålla minst ett mellanslag"
 	} else if (name.length > 20) {
 		infoText.innerHTML = "OBS! Otillåtet med fler än 20 tecken"
-	} else if (name.length < 2) {
-		infoText.innerHTML = "OBS! Namnet måste innehålla mer än 2 tecken"
-		// } else if (om namnet inte innehåller några mellanslag) {
-		// 	infoText.innerHTML = "OBS! Namnet måste innehålla minst ett mellanslag"
 	} else if (isValidName(name)) {
 		infoText.innerHTML = "OBS! Ogiltigt namn"
 	} else {

@@ -127,21 +127,22 @@ function test_input($data)
       <label for="name">För- och efternamn:</label><br>
       <input type="text" name="name" id="name" onblur="validateName()" class="form-container__box-input" required>
       <br>
-      <span class="nameValidationText"></span>
+      <p class="nameValidationText"></p>
     </div>
 
     <div class="form-container__box">
       <label for="email">E-post:</label><br>
       <input type="text" name="email" id="email" onblur="validateEmail()" class="form-container__box-input" placeholder="exempel@test.com" required>
       <br>
-      <span class="emailValidationText"></span>
+      <p class="emailValidationText"></p>
     </div>
 
     <div class="form-container__box">
       <label for="password">Lösenord:</label><br>
       <input type="text" name="password" id="password" onblur="validatePassword()" class="form-container__box-input" required>
       <br>
-      <span class="passwordValidationText"></span>
+      <div class="password-strength-meter"></div>
+      <p class="passwordValidationText"></p>
     </div>
 
     <div class="form-container__box">
@@ -155,21 +156,21 @@ function test_input($data)
       <label for="street">Gatuadress:</label><br>
       <input type="text" name="street" id="street" onblur="validateStreet() " class="form-container__box-input" required>
       <br>
-      <span class="streetValidationText"></span>
+      <p class="streetValidationText"></p>
     </div>
 
     <div class="form-container__box">
       <label for="zip">Postnr:</label><br>
       <input type="text" name="zip" id="zip" oninput="validateZipcode()" placeholder="(ex. 123 45)" class="form-container__box-input" required>
       <br>
-      <span class="zipcodeValidationText"></span>
+      <p class="zipcodeValidationText"></p>
     </div>
 
     <div class="form-container__box">
       <label for="city">Ort:</label><br>
       <input type="text" name="city" id="city" onblur="validateCity()" class="form-container__box-input" required>
       <br>
-      <span class="cityValidationText"></span>
+      <p class="cityValidationText"></p>
     </div>
 
     <div class="form-container__submit">

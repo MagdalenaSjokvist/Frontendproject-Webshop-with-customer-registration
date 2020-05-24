@@ -123,8 +123,9 @@
 }
 
 .error {
-	color: red;
+	color: #f07715;
 	padding: 1%;
+	margin: 5px 5px;
 }
 
 label {
@@ -146,6 +147,7 @@ label {
 .streetValidationText,
 .zipcodeValidationText,
 .cityValidationText {
-	color: red;
+	color: #f07715;
 	font-weight: bolder;
+	margin: 5px 5px;
 }
