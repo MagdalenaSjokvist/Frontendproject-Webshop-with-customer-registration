@@ -1,6 +1,6 @@
-let submitOrderBtn = document.querySelector(".form-container__submit-button")
+let submitBtn = document.querySelector(".form-container__submit-button")
 
-function enableIfFormIsValid() {
+function enableSubmitIfFormIsValid() {
 	if (
 		isNameValid &&
 		isEmailValid &&
@@ -10,7 +10,7 @@ function enableIfFormIsValid() {
 		isZipcodeValid &&
 		isCityValid
 	) {
-		submitOrderBtn.disabled = false
+		submitBtn.disabled = false
 	}
 }
 
@@ -26,11 +26,14 @@ let isCityValid = false
 function validateName() {
 	let name = document.querySelector("#name").value
 	let infoText = document.querySelector(".nameValidationText")
+	// let spaceRegex = /\s/
 
 	if (name.length === 0) {
 		infoText.innerHTML = "OBS! Obligatoriskt fält"
 	} else if (new RegExp("[0-9]").test(name)) {
 		infoText.innerHTML = "OBS! Inga siffror tillåtna"
+	} else if (!name.match(/\s/)) {
+		infoText.innerHTML = "OBS! Namnet måste innehålla minst ett mellanslag"
 	} else if (name.length > 20) {
 		infoText.innerHTML = "OBS! Otillåtet med fler än 20 tecken"
 	} else if (name.length < 2) {
@@ -42,10 +45,10 @@ function validateName() {
 	} else {
 		infoText.innerHTML = ""
 		isNameValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isNameValid = false
 }
 function isValidName(name) {
@@ -67,10 +70,10 @@ function validateEmail() {
 	} else {
 		infoText.innerHTML = ""
 		isEmailValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isEmailValid = false
 }
 function isValidEmail(email) {
@@ -113,21 +116,19 @@ function validatePhone() {
 	} else if (new RegExp("[a-öA-Ö]").test(phone)) {
 		infoText.innerHTML = "OBS! Inga bokstäver tillåtna"
 	} else if (isValidPhone(phone)) {
-		infoText.innerHTML = "OBS! Ogiltigt mobilnummer"
-	} else if (phone.length != 10) {
-		infoText.innerHTML = "OBS! Numret måste vara 10 siffror långt"
+		infoText.innerHTML = "OBS! Ogiltigt telefonnummer"
 	} else {
 		infoText.innerHTML = ""
 		isPhoneValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isPhoneValid = false
 }
 
 function isValidPhone(phone) {
-	let re = /[^0-9:]/
+	let re = /[^0-9:\s-]/
 	return re.test(String(phone))
 }
 
@@ -147,10 +148,10 @@ function validateStreet() {
 	} else {
 		infoText.innerHTML = ""
 		isStreetValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isStreetValid = false
 }
 function isValidStreet(street) {
@@ -177,10 +178,10 @@ function validateZipcode() {
 	} else {
 		infoText.innerHTML = ""
 		isZipcodeValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isZipcodeValid = false
 
 	function determineMaxLength() {
@@ -215,10 +216,10 @@ function validateCity() {
 	} else {
 		infoText.innerHTML = ""
 		isCityValid = true
-		enableSumbitIfFormIsValid()
+		enableSubmitIfFormIsValid()
 		return
 	}
-	submitOrderBtn.disabled = true
+	submitBtn.disabled = true
 	isCityValid = false
 }
 function isValidCity(city) {

@@ -17,9 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else if (isset($_POST['name'])) {
     $name = $_POST['name'];
 
-    // if (strlen($name) < 2) {
-    //   $error[] =  "Ditt namn måste innehålla minst två tecken";
-    // }
     // //if (preg_match('/\s/',$name) > 0)  {
     // if (strpos($name, " ") < 1) {
     //   $error[] =  "Ditt namn måste innehålla minst ett mellanslag";
@@ -148,8 +145,8 @@ function test_input($data)
     </div>
 
     <div class="form-container__box">
-      <label for="phone">Mobilnummer:</label><br>
-      <input type="text" name="phone" id="phone" onblur="validatePhone()" class="form-container__box-input" placeholder="(ex. 0701234567)" required>
+      <label for="phone">Telefonnummer:</label><br>
+      <input type="text" name="phone" id="phone" onblur="validatePhone()" class="form-container__box-input" required>
       <br>
       <span class="phoneValidationText"></span>
     </div>
