@@ -36,7 +36,7 @@ require_once '../config/db.php';
     </div> -->
     <div class="form-container__submit">
 
-      <a href="register-form.php">
+      <a href="register.php">
         <button type="button" class="form-container__submit-button">Skapa nytt konto</button>
       </a>
     </div>
