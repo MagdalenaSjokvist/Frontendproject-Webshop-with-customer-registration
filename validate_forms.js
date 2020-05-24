@@ -4,7 +4,7 @@ function enableIfFormIsValid() {
 	if (
 		isNameValid &&
 		isEmailValid &&
-		// isPasswordValid &&
+		isPasswordValid &&
 		isPhoneValid &&
 		isStreetValid &&
 		isZipcodeValid &&
@@ -16,6 +16,7 @@ function enableIfFormIsValid() {
 
 let isNameValid = false
 let isEmailValid = false
+let isPasswordValid = false
 let isPhoneValid = false
 let isStreetValid = false
 let isZipcodeValid = false
@@ -79,12 +80,13 @@ function isValidEmail(email) {
 
 //Validering av lösenord
 function validatePassword() {
-	let passwrd = document.querySelector("#passwrd").value
+	let password = document.querySelector("#password").value
 	let infoText = document.querySelector(".passwordValidationText")
 
-	if (passwrd.length === 0) {
+	if (password.length === 0) {
 		infoText.innerHTML = "OBS! Obligatoriskt fält"
-		// } else if (om det inte är ett starkt lösenord) {
+
+		// } else if (villkor: om det inte är ett starkt lösenord) {
 		// 	infoText.innerHTML = "OBS! Ditt lösenord är för svagt."
 	} else {
 		infoText.innerHTML = ""
@@ -96,9 +98,9 @@ function validatePassword() {
 	isPasswordValid = false
 }
 
-function isValidPassword(passwrd) {
+function isValidPassword(password) {
 	let re = /^(([^<>()\[\]\\%.,;:\s@"]+(\.[^<>()\[\]\\%.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-	return re.test(String(passwrd))
+	return re.test(String(password))
 }
 
 // Validering av mobilnummer

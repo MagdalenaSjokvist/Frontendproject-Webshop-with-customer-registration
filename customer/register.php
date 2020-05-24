@@ -17,13 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else if (isset($_POST['name'])) {
     $name = $_POST['name'];
 
-    if (strlen($name) < 2) {
-      $error[] =  "Ditt namn måste innehålla minst två tecken";
-    }
-    //if (preg_match('/\s/',$name) > 0)  {
-    if (strpos($name, " ") < 1) {
-      $error[] =  "Ditt namn måste innehålla minst ett mellanslag";
-    }
+    // if (strlen($name) < 2) {
+    //   $error[] =  "Ditt namn måste innehålla minst två tecken";
+    // }
+    // //if (preg_match('/\s/',$name) > 0)  {
+    // if (strpos($name, " ") < 1) {
+    //   $error[] =  "Ditt namn måste innehålla minst ett mellanslag";
+    // }
 
     if (preg_match("/^[a-öA-Ö\s]*$/", $name)) {
       $name = test_input($_POST['name']);
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     foreach ($error as $e) {
       $errors .= "<div class='error'><p> $e </p></div><br />";
-      header('Location:register-form.php');
+      header('Location:register.php');
     }
   } else {
     header('Location:login-form.php');
@@ -141,8 +141,8 @@ function test_input($data)
     </div>
 
     <div class="form-container__box">
-      <label for="passwrd">Lösenord:</label><br>
-      <input type="text" name="passwrd" id="passwrd" onblur="validatePassword()" class="form-container__box-input" required>
+      <label for="password">Lösenord:</label><br>
+      <input type="text" name="password" id="password" onblur="validatePassword()" class="form-container__box-input" required>
       <br>
       <span class="passwordValidationText"></span>
     </div>
