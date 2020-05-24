@@ -941,6 +941,73 @@ label {
   border-radius: 10px;
 }
 
+.login-container {
+  height: 500px;
+  text-align: center;
+}
+
+.login-container__title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Fredoka One", cursive;
+  color: #1f1f1f;
+  width: 100vw;
+  min-height: 100px;
+  margin-top: 130px;
+  padding: 20px;
+}
+
+@media (min-width: 600px) {
+  .login-container__title {
+    font-size: 48px;
+    letter-spacing: 8px;
+  }
+}
+
+.login-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 600px) {
+  .login-form {
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+    margin: 100px 100px;
+    text-color: green;
+  }
+}
+
+.login-form__title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Fredoka One", cursive;
+  color: #1f1f1f;
+  width: 100vw;
+  padding: 20px;
+}
+
+@media (min-width: 600px) {
+  .login-form__title {
+    font-size: 48px;
+    letter-spacing: 8px;
+  }
+}
+
 .product_container {
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
