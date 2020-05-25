@@ -141,8 +141,9 @@ function test_input($data)
       <label for="password">Lösenord:</label><br>
       <input type="text" name="password" id="password" onblur="validatePassword()" class="form-container__box-input" required>
       <br>
-      <div class="password-strength-meter"></div>
       <p class="passwordValidationText"></p>
+      <div class="password-strength-meter" id="password-strength-meter"></div>
+      <div class="password-weaknesses" id="password-weaknesses"></div>
     </div>
 
     <div class="form-container__box">

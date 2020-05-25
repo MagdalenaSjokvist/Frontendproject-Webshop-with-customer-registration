@@ -80,10 +80,103 @@ function isValidEmail(email) {
 
 //Validering av lösenord
 function validatePassword() {
-	let password = document.querySelector("#password").value
 	let infoText = document.querySelector(".passwordValidationText")
+	let passwordInputField = document.querySelector("#password")
+	let passwordInput = passwordInputField.value
+	let strengthMeter = document.querySelector("#password-strength-meter")
+	let weaknessesContainer = document.querySelector("#password-weaknesses")
 
-	if (password.length === 0) {
+	passwordInputField.addEventListener("input", updateStrengthMeter)
+
+	updateStrengthMeter()
+
+	function updateStrengthMeter() {
+		const weaknesses = calculatePasswordStrength(passwordInput)
+
+		let strength = 100
+		weaknessesContainer.innerHTML = ""
+		weaknesses.forEach((weakness) => {
+			if (weakness == null) return
+			strength -= weakness.deduction
+			const messageElement = document.createElement("div")
+			messageElement.innerHTML = weakness.message
+			weaknessesContainer.appendChild(messageElement)
+		})
+		strengthMeter.style.setProperty("--strength", strength)
+	}
+
+	function calculatePasswordStrength(password) {
+		const weaknesses = []
+		weaknesses.push(lengthWeakness(password))
+		weaknesses.push(lowercaseWeakness(password))
+		weaknesses.push(uppercaseWeakness(password))
+		weaknesses.push(numberWeakness(password))
+		weaknesses.push(specialCharactersWeakness(password))
+		weaknesses.push(repeatCharactersWeakness(password))
+		return weaknesses
+	}
+
+	function lengthWeakness(password) {
+		const length = password.length
+		if (length <= 5) {
+			return {
+				message: "Ditt lösenord är för kort",
+				deduction: 40,
+			}
+		}
+		if (length <= 10) {
+			return {
+				message: "Ditt lösenord bör helst vara längre",
+				deduction: 15,
+			}
+		}
+	}
+
+	function lowercaseWeakness(password) {
+		return characterTypeWeakness(password, /[a-z]/g, "små bokstäver (a-z)")
+	}
+
+	function uppercaseWeakness(password) {
+		return characterTypeWeakness(password, /[A-Z]/g, "stora bokstäver (A-Z)")
+	}
+
+	function numberWeakness(password) {
+		return characterTypeWeakness(password, /[0-9]/g, "siffror (0-9)")
+	}
+
+	function specialCharactersWeakness(password) {
+		return characterTypeWeakness(password, /[^0-9a-zA-Z\s]/g, "specialtecken")
+	}
+
+	function characterTypeWeakness(password, regex, type) {
+		const matches = password.match(regex) || []
+
+		if (matches.length === 0) {
+			return {
+				message: `Lösenordet måste innehålla ${type}`,
+				deduction: 20,
+			}
+		}
+		if (matches.length <= 2) {
+			return {
+				message: `Lägg helst till fler ${type}`,
+				deduction: 5,
+			}
+		}
+	}
+
+	function repeatCharactersWeakness(password) {
+		const matches = password.match(/(.)\1/g) || []
+
+		if (matches.length > 0) {
+			return {
+				message: "Lösenordet använder samma tecken flera gånger",
+				deduction: matches.length * 10,
+			}
+		}
+	}
+
+	if (passwordInput.length === 0) {
 		infoText.innerHTML = "OBS! Obligatoriskt fält"
 
 		// } else if (villkor: om det inte är ett starkt lösenord) {

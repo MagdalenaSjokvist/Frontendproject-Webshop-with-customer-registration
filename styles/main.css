@@ -802,7 +802,7 @@ label {
 .zipcodeValidationText,
 .cityValidationText {
   color: #f07715;
-  font-weight: bolder;
+  font-weight: bold;
   margin: 5px 5px;
 }
 
@@ -974,18 +974,20 @@ label {
 
 .password-strength-meter {
   position: relative;
-  margin: 0 auto;
+  margin: auto;
   width: 80%;
   height: 1.5rem;
-  background: rgba(226, 226, 226, 0.733);
+  background: #ebd5f886;
   border: 0.5px solid #6b1d97;
   margin-top: 0.8rem;
+  margin-bottom: 1rem;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 @media (min-width: 500px) {
   .password-strength-meter {
-    width: 30%;
+    width: 35%;
   }
 }
 
@@ -995,9 +997,17 @@ label {
   position: absolute;
   left: 0;
   height: 100%;
-  width: 10%;
+  width: calc(1% * var(--strength, 0));
   border-radius: 10px;
   background-color: #b852f4;
+  -webkit-transition: width 100ms;
+  transition: width 100ms;
+}
+
+.password-weaknesses > * {
+  margin-top: 0.5rem;
+  color: #6b1f97;
+  font-size: small;
 }
 
 .product_container {
