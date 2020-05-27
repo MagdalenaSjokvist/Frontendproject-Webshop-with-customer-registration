@@ -1,6 +1,7 @@
 <?php
 require_once '../second_header_extern.php';
 require_once '../config/db.php';
+require_once 'login.php';
 
 
 $errors = "";
@@ -41,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error[] =  "Du måste ange ett lösenord";
   } else if (isset($_POST['password'])) {
     $password = $_POST['password'];
+    //skapar ett hashed password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
   }
 
   //   if (preg_match("/^[a-öA-Ö\s]*$/", $password)) {
@@ -78,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   //Om det inte finns några felmeddelanden
   if (count($error) == 0) {
 
-    //Skicka beställning till databasen
+    //Skicka kundupopgifterna till databasen
     $sql = "INSERT INTO webshop_customers (name, email, password, phone, street, zip, city)
             VALUES (:name, :email, :password, :phone, :street, :zip, :city)";
 
@@ -175,7 +178,7 @@ function test_input($data)
     </div>
 
     <div class="form-container__submit">
-      <input type="submit" value="Skapa konto" id="submit-registration-btn" class="form-container__submit-button">
+      <input type="submit" name="submit" value="Skapa konto" id="submit-registration-btn" class="form-container__submit-button">
     </div>
 </section>
 

@@ -1,5 +1,5 @@
 <?php
-require_once "config/db.php";
+require_once "../config/db.php";
 
 $stmt = $db->prepare("SELECT `categoryid`, `category`
                       FROM `webshop_categories`");
@@ -51,12 +51,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
           <ul class="menu-wraper__link-list">
 
+
             <li class="menu-wraper__link-item">
-              <a class="menu-wraper__links" href="/index.php">HEM</a>
+              <a class="menu-wraper__links" href="../index.php">HEM</a>
             </li>
             <li class="menu-wraper__link-item">
               <div class="dropdown">
-                <a class="menu-wraper__links" id="dropdown-categories" href="#">KATEGORIER</a>
+                <a class="menu-wraper__links" id="dropdown-categories" href="../index.php">KATEGORIER</a>
 
                 <div class="dropdown-content">
                   <?php
@@ -65,12 +66,15 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 </div>
               </div>
             </li>
+
             <li class="menu-wraper__link-item">
-              <a class="menu-wraper__links" href="/customer/index.php">LOGGA IN</a>
+              <a class="menu-wraper__links" href="/customer/index.php">LOGGA UT</a>
             </li>
+
             <li class="menu-wraper__link-item">
-              <a class="menu-wraper__links" href="/admin/index.php">ADMIN</a>
+              <h4>Inloggad </h4>
             </li>
+
 
           </ul>
           <div class="cart">

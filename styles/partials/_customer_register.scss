@@ -43,5 +43,12 @@
 .password-weaknesses > * {
 	margin-top: 0.5rem;
 	color: #6b1f97;
-	font-size: small;
+	font-size: x-small;
+	@media (min-width: 500px) {
+		font-size: small;
+	}
+
+	div {
+		margin: 0;
+	}
 }

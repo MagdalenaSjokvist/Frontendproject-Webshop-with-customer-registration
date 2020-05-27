@@ -71,7 +71,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               </div>
             </li>
             <li class="menu-wraper__link-item">
-              <a class="menu-wraper__links" href="/customer/login-form.php">LOGGA IN</a>
+              <a class="menu-wraper__links" href="/customer/index.php">LOGGA IN</a>
             </li>
             <li class="menu-wraper__link-item">
               <a class="menu-wraper__links" href="/admin/index.php">ADMIN</a>

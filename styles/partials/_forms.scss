@@ -26,7 +26,7 @@
 	}
 	&__heading {
 		width: 100%;
-		padding: 30px;
+		padding: 20px;
 		text-align: center;
 		font-size: 18px;
 		text-transform: uppercase;
@@ -37,10 +37,10 @@
 	}
 	&__box {
 		width: 100%;
-		padding-top: 15px;
+		padding-top: 0.7rem;
 		@media (min-width: 600px) {
 			width: 100%;
-			padding-bottom: 1rem;
+			padding-bottom: 0.5rem;
 		}
 	}
 	&__box-input {
@@ -58,7 +58,7 @@
 		}
 	}
 	&__submit {
-		margin-top: 2rem;
+		margin-top: 1.5rem;
 		padding-bottom: 1rem;
 	}
 	&__submit-button {
