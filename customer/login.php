@@ -1,17 +1,18 @@
 <?php
 require_once '../config/db.php';
 
+// //initiera sessionshantering
+// session_start();
 
-//initiera sessionshantering
-session_start();
+//Töm variabler
+// $errors = "";
+// $error = array();
+// $inputEmail = "";
+// $storedEmail = "";
+// $inputPassword = "";
+// $storedPassword = "";
 
-// kollar om användaren redan är inloggad som då skickas till välkomstsidan
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-  header("location: welcome.php");
-  exit;
-}
-
-$errorText = "";
+$errorMessage = "";
 $errors = array();
 $name = $email = $password = $phone = $street = $zip = $city = "";
 
@@ -30,6 +31,9 @@ if (isset($_POST['submit'])) {
   $storedEmail = "admin@mail.se";
   $storedPassword = "admin";
 
+?>
+
+<?php
   //Kontrollerar om de inskrivna uppgifterna matchar mot de lagrade i databasen
   //Skapar felmeddelande om något inte stämmer
   if (($inputEmail != $storedEmail) || ($inputPassword != $storedPassword)) {
@@ -38,15 +42,18 @@ if (isset($_POST['submit'])) {
 
   //Om det finns några fel
   if (count($errors) > 0) {
+    $errorMessage = '<div class="error">';
 
     foreach ($errors as $e) {
-      $errorText .= "<div class='error'><p> $e </p></div><br />";
+      $errorMessage .= "<p> $e </p><br>";
       header('Location:index.php');
     }
+    $errorMessage .= '</div>';
   } else {
     header('Location:welcome.php');
   }
 }
+
 //   //Kontrollerar om felmeddelanden har skapats
 //   if (count($errors) == 0) {
 //     //Skapa en sessionsvariabel med id-nummer 1
