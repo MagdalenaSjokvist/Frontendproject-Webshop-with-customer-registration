@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else if (isset($_POST['password'])) {
     $password = $_POST['password'];
     //skapar ett hashed password (för säkerhetsoptimering)
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
   }
 
   //   if (preg_match("/^[a-öA-Ö\s]*$/", $password)) {
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':password', $encryptedPassword);
     $stmt->bindParam(':phone', $phone);
     $stmt->bindParam(':street', $street);
     $stmt->bindParam(':zip', $zip);
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
 
     $message = "<div><h4> Tack för din registrering! Nu kan du logga in med dina uppgifter.</h4><br>        
-          <a href='index.php'><button type='button' class='form-container__submit-button'>Logga in</button>
+          <a href='login.php'><button type='button' class='form-container__submit-button'>Logga in</button>
   </a></div><br>";
   }
 

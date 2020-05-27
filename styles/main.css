@@ -1028,6 +1028,20 @@ label {
   margin: 0;
 }
 
+.welcome-section {
+  min-height: 750px;
+  max-width: 75%;
+  margin: auto;
+  margin-top: 15%;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .welcome-section {
+    min-height: 1000px;
+  }
+}
+
 .product_container {
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../config/db.php";
 
 $stmt = $db->prepare("SELECT `categoryid`, `category`
@@ -68,7 +69,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             </li>
 
             <li class="menu-wraper__link-item">
-              <a class="menu-wraper__links" href="/customer/index.php">LOGGA UT</a>
+              <a class="menu-wraper__links" href="/customer/logout.php">LOGGA UT</a>
             </li>
 
             <li class="menu-wraper__link-item">
