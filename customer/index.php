@@ -4,7 +4,7 @@ require_once '../config/db.php';
 // require_once 'login.php';
 
 //Töm variabler
-$errors = "";
+// $successMessage = "";
 $errorMessage = "";
 $inputEmail = "";
 $storedEmail = "";
@@ -12,57 +12,60 @@ $inputPassword = "";
 $storedPassword = "";
 
 //initiera sessionshantering
-session_start();
+// session_start();
 
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-  header("location: welcome.php");
-  exit;
-}
-
+// // Check if the user is already logged in, if yes then redirect him to welcome page
+// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+//   header("location: welcome.php");
+//   exit;
+// }
 
 
 //Om logga in-knappen har klickats på
 if (isset($_POST['submit'])) {
-
-  $errors = array();
+  $errorMessage = "";
 
   //Kollar om epost eller lösnord inte är ifyllt
-  if (empty($_POST['email']) || empty($_POST['password'])) {
-    $errors[] = "Oops! Du missade visst något? Fyll i både e-postadress och lösenord.";
+  if (empty($_POST['email']) && empty($_POST['password'])) {
+    $errorMessage = "<p class='error-message'> Fyll i e-postadress och lösenord.</p><br>";
+  } else if (empty($_POST['email'])) {
+    $errorMessage = "<p class='error-message'> Oops! Du missade visst något. Fyll i din e-postadress.</p><br>";
+  } else if (empty($_POST['password'])) {
+    $errorMessage = "<p class='error-message'>Oops! Du missade visst något. Fyll i ditt lösenord.</p><br>";
   } else {
     $inputEmail = $_POST['email'];
     $inputPassword = $_POST['password'];
   }
-
-  //Testvariabler (ska bytas ut mot hämtade kunduppgifter från databasen)
-  $storedEmail = "admin@mail.se";
-  $storedPassword = "admin";
-
-
-  //Kontrollerar om de inskrivna uppgifterna matchar mot de lagrade i databasen
-  //Skapar felmeddelande om något inte stämmer
-  if (($inputEmail != $storedEmail) || ($inputPassword != $storedPassword)) {
-    $errors[] = "Oops! Något stämmer inte. Kontrollera din epostadress och ditt lösenord igen.";
-  }
-
-  //Om det finns några fel
-  if (count($errors) > 0) {
-    $errorMessage = 'något är fel';
-    // echo 'något är fel';
-    // $errorMessage = '<div class="error">';
-
-    // foreach ($errors as $e) {
-    //   $errorMessage .= "<p> $e </p><br>";
-    //   header('Location:index.php');
-    // }
-    // $errorMessage .= '</div>';
-    // echo $errorMessage;
-  } else {
-    header('Location:welcome.php');
-  }
 }
+
+//Testvariabler (ska bytas ut mot hämtade kunduppgifter från databasen)
+// $storedEmail = "admin@mail.se";
+// $storedPassword = "admin";
+
+
+//Kontrollerar om de inskrivna uppgifterna matchar mot de lagrade i databasen
+//Skapar felmeddelande om något inte stämmer
+// if (($inputEmail != $storedEmail) || ($inputPassword != $storedPassword)) {
+//   $errorMessage = "<h4>Oops! Något stämmer inte. Kontrollera din epostadress och ditt lösenord igen.</h4>";
+// }
+
+//Om det finns några fel
+// if (count($errors) > 0) {
+//   $errorMessage = 'något är fel';
+// echo 'något är fel';
+// $errorMessage = '<div class="error">';
+
+// foreach ($errors as $e) {
+//   $errorMessage .= "<p> $e </p><br>";
+//   header('Location:index.php');
+// }
+// $errorMessage .= '</div>';
+// echo $errorMessage;
+// } else {
+//   header('Location:welcome.php');
+// }
+
 
 // //Kontrollerar om felmeddelanden har skapats
 // if (count($errors) == 0) {

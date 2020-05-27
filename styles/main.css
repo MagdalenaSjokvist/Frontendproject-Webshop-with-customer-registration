@@ -958,6 +958,14 @@ label {
   }
 }
 
+.error-message {
+  color: #f07715;
+  padding: 1%;
+  margin: 5px 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .register-section {
   min-height: 750px;
   max-width: 75%;

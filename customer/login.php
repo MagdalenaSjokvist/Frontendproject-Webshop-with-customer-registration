@@ -13,15 +13,16 @@ require_once '../config/db.php';
 // $storedPassword = "";
 
 $errorMessage = "";
-$errors = array();
-$name = $email = $password = $phone = $street = $zip = $city = "";
+$successMessage = "";
+// $errors = array();
+$name = $email = $inputPassword = $storedPassword = $phone = $street = $zip = $city = "";
 
 //Om logga in-knappen har klickats på
 if (isset($_POST['submit'])) {
 
   //Kollar om epost eller lösnord inte är ifyllt
   if (empty($_POST['email']) || empty($_POST['password'])) {
-    $errors[] = "Oops! Du missade visst något? Fyll i både e-postadress och lösenord.";
+    $errorMessage = "<div><h4>Oops! Du missade visst något? Fyll i både e-postadress och lösenord.<h4></div>";
   } else {
     $inputEmail = $_POST['email'];
     $inputPassword = $_POST['password'];
