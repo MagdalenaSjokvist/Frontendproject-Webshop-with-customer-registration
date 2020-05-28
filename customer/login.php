@@ -59,17 +59,12 @@ if (isset($_POST['submit'])) {
       // Visa felmeddelande om lösenordet inte matchar
       $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
     }
+    //Visa felmeddelande om e-postadressen inte finns registrerad i databasen
   }
-
-  //Visa felmeddelande om e-postadressen inte finns registrerad i databasen
 } else {
   $errorMessage = "<p class='error-message'>Din e-postadress verkar inte vara registrerad. Prova igen eller skapa ett nytt konto.</p>
-  </a>";
+</a>";
 }
-
-
-
-
 ?>
 
 <section class="login-section">
@@ -82,15 +77,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     <?php echo $errorMessage ?>
-    <!-- 
-          //skriv ut eventuella felmeddelanden
-          // if (count($errors) > 0) {
-          //   foreach ($errors as $error) {
-          //     echo '<p>' . $error . '</p><br>';
-          //   }
-          // }
-          // 
-          -->
+
 
     <div class="form-container__box">
       <label for="email">E-postadress:</label><br>
