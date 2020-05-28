@@ -1032,7 +1032,7 @@ label {
   min-height: 750px;
   max-width: 75%;
   margin: auto;
-  margin-top: 15%;
+  margin-top: 48vh;
   text-align: center;
 }
 
@@ -2542,7 +2542,7 @@ main {
 .second_hero {
   background-image: url("../../images/1x/categoryhero.png");
   min-width: 100vw;
-  height: 50vh;
+  height: 48vh;
   background-repeat: no-repeat;
   background-position: center;
   -webkit-transition: ease 300ms;

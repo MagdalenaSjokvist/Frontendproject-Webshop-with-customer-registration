@@ -1,31 +1,23 @@
 <?php
+
 require_once '../second_header_extern.php';
-// require_once '../config/db.php';
+require_once '../config/db.php';
 
-// // // Initialize the session
-// session_start();
+// Kollar om en användare redan är inloggad - redirectar då till välkomstsidan
+// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+//   header("location: welcome.php");
+//   exit;
+// }
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-  header("location: welcome.php");
-  exit;
-}
-
-
-// require_once 'login.php';
 //Töm variabler
 $errorMessage = "";
-$customerId = "";
-$customerName = "";
-$inputEmail = "";
-$storedEmail = "";
-$inputPassword = "";
-$storedPassword = "";
-
+// $inputEmail = "";
+// $storedEmail = "";
+// $inputPassword = "";
+// $storedPassword = "";
 
 //Om logga in-knappen har klickats på
 if (isset($_POST['submit'])) {
-  $errorMessage = "";
 
   //Kollar om epost eller lösnord är ifyllt och visar felmeddelanden om något saknas
   if (empty($_POST['email']) && empty($_POST['password'])) {
@@ -34,50 +26,54 @@ if (isset($_POST['submit'])) {
     $errorMessage = "<p class='error-message'> Oops! Du missade visst något. Fyll i din e-postadress.</p><br>";
   } else if (empty($_POST['password'])) {
     $errorMessage = "<p class='error-message'>Oops! Du missade visst något. Fyll i ditt lösenord.</p><br>";
+
+    //Om både email och lösenord är korrekt ifyllt - spara ner i variabler som vi kan jämföra mot databasen
   } else {
     $inputEmail = $_POST['email'];
     $inputPassword = $_POST['password'];
   }
 
-
-  //Hämtar id, e-postadress och lösenord från databasen
-  $sql = "SELECT customerid, name, email, password FROM webshop_customers WHERE email=:email";
+  //Hämtar kunduppgifter från databasen
+  $sql = "SELECT * FROM webshop_customers WHERE email=:email";
   $stmt = $db->prepare($sql);
   $stmt->bindParam(':email', $inputEmail);
   $stmt->execute();
 
   //Kollar om e-postadressen finns i databasen 
   if ($stmt->rowCount() > 0) {
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      //Hämta uppgifterna från den aktuella kundraden, och spara i variabler
-      $customerId = ($row['customerid']);
-      $customerName = ($row['name']);
-      $storedEmail = ($row['email']);
-      $storedPassword = ($row['password']);
-      if (password_verify($inputPassword, $storedPassword)) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Lösenordet stämmer - starta en ny session
-        session_start();
+    //Hämta det lagrade lösenordet
+    $storedPassword = ($row['password']);
 
-        //Spara data i sessions-variabler
-        $_SESSION["loggedin"] = true;
-        $_SESSION["id"] = $customerId;
-        $_SESSION["username"] = $customerName;
+    //Kollar om det ifyllda lösenordet matchar det krypterade i databasen
+    if (password_verify($inputPassword, $storedPassword)) {
 
-        // Redirect user to welcome page
-        header("location: welcome.php");
-      } else {
-        // Display an error message if password is not valid
-        $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
-      }
+      //Hämta kundens uppgifter från databasen och spara i sessionsvariabler
+      $_SESSION["name"] = $row["name"];
+      $_SESSION["email"] = $row["email"];
+      $_SESSION["phone"] = $row["phone"];
+      $_SESSION["street"] = $row["street"];
+      $_SESSION["zip"] = $row["zip"];
+      $_SESSION["city"] = $row["city"];
+
+      //Skapa en sessionsvariabel som visar att någon är inloggad
+      $_SESSION["loggedin"] = true;
+
+      // Redirect user to welcome page
+      header("location: welcome.php");
+    } else {
+      // Visa felmeddelande om lösenordet inte matchar
+      $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
     }
-
-    //Om e-postadressen inte finns registrerad i databasen
-  } else {
-    $errorMessage = "<p class='error-message'>Din e-postadress verkar inte vara registrerad. Prova igen eller skapa ett nytt konto.</p>
-  </a>";
   }
+
+  //Visa felmeddelande om e-postadressen inte finns registrerad i databasen
+} else {
+  $errorMessage = "<p class='error-message'>Din e-postadress verkar inte vara registrerad. Prova igen eller skapa ett nytt konto.</p>
+  </a>";
 }
+
 
 
 

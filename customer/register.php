@@ -5,7 +5,7 @@ require_once '../config/db.php';
 
 $message = "";
 $errors = array();
-$name = $email = $password = $phone = $street = $zip = $city = "";
+$name = $email = $password = $encryptedPassword = $phone = $street = $zip = $city = "";
 
 //Lyssnar efter POST-request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,24 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = "Du måste ange ditt namn";
   } else if (isset($_POST['name'])) {
     $name = $_POST['name'];
-
-    // //if (preg_match('/\s/',$name) > 0)  {
-    // if (strpos($name, " ") < 1) {
-    //   $errors[] =  "Ditt namn måste innehålla minst ett mellanslag";
-    // }
-
-    // if (preg_match("/^[a-öA-Ö\s]*$/", $name)) {
-    //   $name = test_input($_POST['name']);
-    // } else {
-    //   $errors[] = "Namnet får endast innehålla bokstäver och mellanslag";
-    // }
   }
 
-
   if (empty($_POST['email'])) {
-    $errors[] =  "Du måste ange en e-postadress";
+    $errors[] = "Du måste ange en e-postadress";
   } else if (isset($_POST['email'])) {
-    $email = $_POST['email'];
 
     //Kontrollerar om e-postadressen redan är registrerad (finns i databasen)
     $sql_c = "SELECT * FROM webshop_customers WHERE email = :email";
@@ -49,42 +36,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (empty($_POST['password'])) {
-    $errors[] =  "Du måste ange ett lösenord";
+    $errors[] = "Du måste ange ett lösenord";
   } else if (isset($_POST['password'])) {
-    $password = $_POST['password'];
-    //skapar ett hashed password (för säkerhetsoptimering)
+    $password = test_input($_POST['password']);
+    //skapar ett krypterat lösenord (för säkerhetsoptimering)
     $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
   }
 
-  //   if (preg_match("/^[a-öA-Ö\s]*$/", $password)) {
-  //     $password = test_input($_POST['password']);
-  //   } else {
-  //     $errors[] = "Lösenordet får endast innehålla bokstäver och mellanslag";
-  //   }
-  // }
 
   if (empty($_POST['phone'])) {
-    $errors[] =  "Du måste ange telefonnummer";
+    $errors[] = "Du måste ange telefonnummer";
   } else if (isset($_POST['phone'])) {
-    $phone = $_POST['phone'];
+    $phone = test_input($_POST['phone']);
   }
 
   if (empty($_POST['street'])) {
-    $errors[] =  "Du måste ange gatuadress";
+    $errors[] = "Du måste ange gatuadress";
   } else if (isset($_POST['street'])) {
-    $street = $_POST['street'];
+    $street = test_input($_POST['street']);
   }
 
   if (empty($_POST['zip'])) {
     $errors[] =  "Du måste ange gatuadress";
   } else if (isset($_POST['zip'])) {
-    $zip = str_replace(' ', '', $_POST['zip']);
+    $zip = test_input(str_replace(' ', '', $_POST['zip']));
   }
 
   if (empty($_POST['city'])) {
     $errors[] = "Du måste ange gatuadress";
   } else if (isset($_POST['city'])) {
-    $city = $_POST['city'];
+    $city = test_input($_POST['city']);
   }
 
 

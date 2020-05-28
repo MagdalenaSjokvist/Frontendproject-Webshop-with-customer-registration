@@ -1,6 +1,27 @@
 <?php
+
 require_once '../second_header_extern.php';
 require_once '../config/db.php';
+
+//Skapa tomma variabler för inputfältens "value" (= inget är förifyllt om ingen är inloggad)
+$name = "";
+$email = "";
+$phone = "";
+$street = "";
+$zip = "";
+$city = "";
+
+//Kolla om någon redan är inloggad (=pågående session) - spara ner aktuella sessionsvariabler som kan anropas i inputfälten.
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
+  $name = $_SESSION['name'];
+  $email = $_SESSION['email'];
+  $phone = $_SESSION['phone'];
+  $street = $_SESSION['street'];
+  $zip = $_SESSION['zip'];
+  $city = $_SESSION['city'];
+}
+
 ?>
 
 </header>
@@ -66,42 +87,42 @@ require_once '../config/db.php';
         <!--Input-fält som kunden fyller i-->
         <div class="order_field-name form-container__box">
           <label for="name">För- och efternamn:</label><br>
-          <input type="text" name="name" id="name" onblur="validateName()" class="form-container__box-input" required>
+          <input type="text" name="name" id="name" value="<?= $name ?>" onblur="validateName()" class="form-container__box-input" required>
           <br>
           <span class="nameValidationText"></span>
         </div>
 
         <div class="order_field-email form-container__box">
           <label for="email">E-post:</label><br>
-          <input type="text" name="email" id="email" onblur="validateEmail()" class="form-container__box-input" placeholder="exempel@test.com" required>
+          <input type="text" name="email" id="email" value="<?= $email ?>" onblur="validateEmail()" class="form-container__box-input" placeholder="exempel@test.com" required>
           <br>
           <span class="emailValidationText"></span>
         </div>
 
         <div class="order_field-phone form-container__box">
           <label for="phone">Mobilnummer:</label><br>
-          <input type="text" name="phone" id="phone" onblur="validatePhone()" class="form-container__box-input" placeholder="(ex. 0701234567)" required>
+          <input type="text" name="phone" id="phone" value="<?= $phone ?>" onblur="validatePhone()" class="form-container__box-input" placeholder="(ex. 0701234567)" required>
           <br>
           <span class="phoneValidationText"></span>
         </div>
 
         <div class="order_field-street form-container__box">
           <label for="street">Gatuadress:</label><br>
-          <input type="text" name="street" id="street" onblur="validateStreet() " class="form-container__box-input" required>
+          <input type="text" name="street" id="street" value="<?= $street ?>" onblur="validateStreet() " class="form-container__box-input" required>
           <br>
           <span class="streetValidationText"></span>
         </div>
 
         <div class="order_field-postalcode form-container__box">
           <label for="zip">Postnr:</label><br>
-          <input type="text" name="zip" id="zip" oninput="validateZipcode()" placeholder="(ex. 123 45)" class="form-container__box-input" required>
+          <input type="text" name="zip" id="zip" value="<?= $zip ?>" oninput="validateZipcode()" placeholder="(ex. 123 45)" class="form-container__box-input" required>
           <br>
           <span class="zipcodeValidationText"></span>
         </div>
 
         <div class="order_field-city form-container__box">
           <label for="city">Ort:</label><br>
-          <input type="text" name="city" id="city" onblur="validateCity()" class="form-container__box-input" required>
+          <input type="text" name="city" id="city" value="<?= $city ?>" onblur="validateCity()" class="form-container__box-input" required>
           <br>
           <span class="cityValidationText"></span>
         </div>

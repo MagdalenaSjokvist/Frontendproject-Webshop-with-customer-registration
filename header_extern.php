@@ -1,4 +1,7 @@
 <?php
+// Initierar sessionen
+session_start();
+
 require_once "config/db.php";
 
 $menuOption3Text = "";
@@ -6,20 +9,18 @@ $menuOption3Link = "";
 $menuOption4Text = "";
 $menuOption4Link = "";
 
-// Initierar sessionen
-session_start();
 
 // Kollar om någon är inloggad och anpassar menyn därefter
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   $menuOption3Text = "MINA SIDOR";
-  $menuLogin3Link = "/customer/welcome.php";
+  $menuLogin3Link = "../customer/welcome.php";
   $menuOption4Text = "Logga ut";
-  $menuOption4Link = "/customer/logout.php";
+  $menuOption4Link = "../customer/logout.php";
 } else {
   $menuOption3Text = "LOGGA IN";
-  $menuOption3Link = "/customer/login.php";
+  $menuOption3Link = "../customer/login.php";
   $menuOption4Text = "ADMIN";
-  $menuOption4Link = "/admin/index.php";
+  $menuOption4Link = "../admin/index.php";
 }
 
 //Hämtar befintliga kategorier med minst en produkt från databasen för att visa i menyn 

@@ -7,5 +7,10 @@ $_SESSION = array();
 //Avsluta sessionen
 session_destroy();
 
-header("location:index.php");
-exit;
+?>
+
+<script type='text/javascript'>
+  alert("Du är nu utloggad. Välkommen tillbaka!")
+  location.replace("login.php");
+  //redirectar med JS istället för PHP (header("location:login.php")), för att alert ska hinna visas innan redirect
+</script>

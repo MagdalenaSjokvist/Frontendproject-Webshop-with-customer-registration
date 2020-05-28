@@ -7,16 +7,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   exit;
 }
 
-
-
 ?>
 
 <section class="welcome-section">
 
-  <h1>Hej <?php ?> och välkommen!</h1>
-
+  <h1>Välkommen <?php echo $_SESSION["name"] ?>!</h1>
+  <br>
   <p>
-    <a href='reset-password.php'><button type='button' class='form-container__submit-button'>Återställ lösenord</button>
+    <a href='../index.php'><button type='button' class='form-container__submit-button'>Börja shoppa!</button>
+      <br><br><a href='reset-password.php'><button type='button' class='form-container__submit-button'>Återställ lösenord</button>
+      </a>
     </a>
   </p>
 </section>
