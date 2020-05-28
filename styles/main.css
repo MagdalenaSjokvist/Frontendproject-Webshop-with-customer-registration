@@ -1029,7 +1029,7 @@ label {
 }
 
 .welcome-section {
-  min-height: 750px;
+  min-height: 500px;
   max-width: 75%;
   margin: auto;
   margin-top: 30vh;
@@ -2652,14 +2652,8 @@ main {
 }
 
 .table_orders-head-text {
-  font-size: 34px;
-  padding: 1%;
-}
-
-@media (max-width: 800px) {
-  .table_orders-head-text {
-    font-size: 20px;
-  }
+  font-size: 20px;
+  padding: 2%;
 }
 
 @media (max-width: 800px) {
