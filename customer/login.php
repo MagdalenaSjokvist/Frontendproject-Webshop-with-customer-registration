@@ -2,7 +2,7 @@
 require_once '../second_header_extern.php';
 // require_once '../config/db.php';
 
-// // Initialize the session
+// // // Initialize the session
 // session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
         $_SESSION["username"] = $customerName;
 
         // Redirect user to welcome page
-        // header("location: welcome.php");
+        header("location: welcome.php");
       } else {
         // Display an error message if password is not valid
         $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
@@ -84,7 +84,8 @@ if (isset($_POST['submit'])) {
 ?>
 
 <section class="login-section">
-  <?php print_r($_SESSION) ?>
+  <?php //print_r($_SESSION) 
+  ?>
   <form class="form-container" action="#" method="POST">
     <!-- <h1 class="login-title page-title login-container__title">Välkommen!</h1> -->
     <div class="form-container__heading">

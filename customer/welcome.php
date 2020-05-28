@@ -1,13 +1,15 @@
 <?php
-require_once 'header-customer.php';
+require_once '../second_header_extern.php';
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   header("location: login.php");
   exit;
 }
-?>
 
+
+
+?>
 
 <section class="welcome-section">
 
