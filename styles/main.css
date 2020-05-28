@@ -962,7 +962,7 @@ label {
   color: #f07715;
   padding: 1%;
   margin: 5px 5px;
-  font-size: 14px;
+  font-size: medium;
   font-weight: bold;
 }
 
@@ -1032,7 +1032,7 @@ label {
   min-height: 750px;
   max-width: 75%;
   margin: auto;
-  margin-top: 48vh;
+  margin-top: 30vh;
   text-align: center;
 }
 
@@ -2542,7 +2542,7 @@ main {
 .second_hero {
   background-image: url("../../images/1x/categoryhero.png");
   min-width: 100vw;
-  height: 48vh;
+  height: 25vh;
   background-repeat: no-repeat;
   background-position: center;
   -webkit-transition: ease 300ms;

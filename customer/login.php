@@ -3,18 +3,12 @@
 require_once '../second_header_extern.php';
 require_once '../config/db.php';
 
-// Kollar om en användare redan är inloggad - redirectar då till välkomstsidan
-// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-//   header("location: welcome.php");
-//   exit;
-// }
-
-//Töm variabler
+//Tömmer variabler
 $errorMessage = "";
-// $inputEmail = "";
-// $storedEmail = "";
-// $inputPassword = "";
-// $storedPassword = "";
+$inputEmail = "";
+$storedEmail = "";
+$inputPassword = "";
+$storedPassword = "";
 
 //Om logga in-knappen har klickats på
 if (isset($_POST['submit'])) {

@@ -174,6 +174,7 @@ function test_input($data)
     <div class="form-container__submit">
       <input type="submit" name="submit" value="Skapa konto" id="submit-registration-btn" class="form-container__submit-button">
     </div>
+  </form>
 </section>
 
 <?php require_once '../footer.php' ?>
