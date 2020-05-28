@@ -13,10 +13,10 @@ $newEncryptedPassword = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   //Kollar att alla fält är korrekt ifyllda
-  if (empty($_POST['new-password'])) {
+  if (empty($_POST['password'])) {
     $errors[] = "<p class='error-message'>Du måste ange ett nytt lösenord</p>";
-  } else if (isset($_POST['new-password'])) {
-    $newPassword = test_input($_POST['new-password']);
+  } else if (isset($_POST['password'])) {
+    $newPassword = test_input($_POST['password']);
   }
 
   if (empty($_POST['confirm-password'])) {

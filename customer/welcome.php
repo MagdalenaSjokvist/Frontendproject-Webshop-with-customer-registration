@@ -1,6 +1,15 @@
 <?php
 require_once '../second_header_extern.php';
 
+//Hämtar kunduppgifter från databasen
+$sql = "SELECT * FROM webshop_orders WHERE email=:email";
+$stmt = $db->prepare($sql);
+$stmt->bindParam(':email', $inputEmail);
+$stmt->execute();
+
+//Kollar om e-postadressen finns i databasen 
+if ($stmt->rowCount() > 0) {
+}
 ?>
 
 <section class="welcome-section">
