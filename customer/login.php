@@ -1,5 +1,4 @@
 <?php
-
 require_once '../second_header_extern.php';
 require_once '../config/db.php';
 
@@ -21,13 +20,13 @@ if (isset($_POST['submit'])) {
   } else if (empty($_POST['password'])) {
     $errorMessage = "<p class='error-message'>Oops! Du missade visst något. Fyll i ditt lösenord.</p><br>";
 
-    //Om både email och lösenord är korrekt ifyllt - spara ner i variabler som vi kan jämföra mot databasen
+    //Om både email och lösenord är korrekt ifyllt - spara som variabler för jämförelse mot databasen
   } else {
     $inputEmail = $_POST['email'];
     $inputPassword = $_POST['password'];
   }
 
-  //Hämtar kunduppgifter från databasen
+  //Hämtar kunduppgifter från databasen, utifrån inloggad e-postadress
   $sql = "SELECT * FROM webshop_customers WHERE email=:email";
   $stmt = $db->prepare($sql);
   $stmt->bindParam(':email', $inputEmail);

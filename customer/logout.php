@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Töm sessionens variabler på väden
+//Töm sessionens variabler på väden
 $_SESSION = array();
 
 //Avsluta sessionen

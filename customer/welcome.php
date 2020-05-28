@@ -4,14 +4,17 @@ require_once '../config/db.php';
 
 $customersOrders = "";
 
-//Hämtar orderuppgifter från databasen utifrån email (hämtar både pågående ich slutförda - dvs från två tabeller)
-$sql = "SELECT * FROM webshop_orders WHERE email=:email UNION ALL SELECT * FROM webshop_orderscomplete WHERE email=:email2";
+//Hämta orderuppgifter från databasen utifrån inloggad e-postadress
+// (hämtar både pågående + slutförda ordrar, dvs från två tabeller)
+$sql = "SELECT * FROM webshop_orders WHERE email=:email 
+        UNION ALL 
+        SELECT * FROM webshop_orderscomplete WHERE email=:email2";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':email', $_SESSION["email"]);
 $stmt->bindParam(':email2', $_SESSION["email"]);
 $stmt->execute();
 
-//Kollar om kunden har några beställningar i databasen 
+//Om kunden har några beställningar i databasen 
 if ($stmt->rowCount() > 0) {
 
   //Skapa tabellhuvud med rubriker
@@ -75,9 +78,9 @@ if ($stmt->rowCount() > 0) {
       $orderedProducts .= "<br>";
     }
 
-    //Översätter statuskoderna till beskrivande text
+    //Översätter statuskoderna till text
     if ($orderStatusId == 1) {
-      $orderStatus = "Ny";
+      $orderStatus = "Skickad";
     } elseif ($orderStatusId == 2) {
       $orderStatus = "Behandlas";
     } elseif ($orderStatusId == 3) {
@@ -117,7 +120,7 @@ if ($stmt->rowCount() > 0) {
 
   <h2>Dina beställningar</h2><br>
   <div class='table_container'>
-    <!-- här skrivs tabellen ut med all orderinfo -->
+    <!-- här skrivs tabellen ut med kundens orderuppgifter -->
     <?php echo $customersOrders ?>
   </div>
   <br>

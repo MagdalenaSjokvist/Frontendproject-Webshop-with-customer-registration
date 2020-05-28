@@ -3,6 +3,7 @@
 // Initierar sessionen
 session_start();
 
+//skapar uppkoppling mot databasen
 require_once "config/db.php";
 
 //Deklarera variabler för anpassade menyval (beroende på inloggad eller ej)
