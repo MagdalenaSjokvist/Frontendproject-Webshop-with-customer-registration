@@ -1,12 +1,14 @@
 <?php
 require_once '../second_header_extern.php';
+require_once '../config/db.php';
 
 $customersOrders = "";
 
-//Hämtar kunduppgifter från databasen utifrån e-postadressen som är inloggad
-$sql = "SELECT * FROM webshop_orders WHERE email=:email";
+//Hämtar orderuppgifter från databasen utifrån email (hämtar både pågående ich slutförda - dvs från två tabeller)
+$sql = "SELECT * FROM webshop_orders WHERE email=:email UNION ALL SELECT * FROM webshop_orderscomplete WHERE email=:email2";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':email', $_SESSION["email"]);
+$stmt->bindParam(':email2', $_SESSION["email"]);
 $stmt->execute();
 
 //Kollar om kunden har några beställningar i databasen 
