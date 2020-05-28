@@ -3,7 +3,7 @@ require_once '../second_header_extern.php';
 
 $customersOrders = "";
 
-//Hämtar kunduppgifter från databasen
+//Hämtar kunduppgifter från databasen utifrån e-postadressen som är inloggad
 $sql = "SELECT * FROM webshop_orders WHERE email=:email";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':email', $_SESSION["email"]);
@@ -22,6 +22,7 @@ if ($stmt->rowCount() > 0) {
                   <th class='table_orders-head-text'>Kunduppgifter</th>
                   <th class='table_orders-head-text'>Produkter</th>
                   <th class='table_orders-head-text'>Summa</th>
+                  <th class='table_orders-head-text'>Status</th>
                </tr>";
 
 
@@ -30,6 +31,7 @@ if ($stmt->rowCount() > 0) {
     $orderId = htmlspecialchars($row['orderid']);
     $orderDate = htmlspecialchars($row['orderdate']);
     $orderDate = substr($orderDate, 0, 10); //Hämtar de 10 första tecknen = bara datumet, utan tidsangivelsen)
+    $orderStatusId = htmlspecialchars($row['status']);
     $totalPrice = htmlspecialchars($row['totalprice']);
     $name = htmlspecialchars($row['name']);
     $email = htmlspecialchars($row['email']);
@@ -44,7 +46,7 @@ if ($stmt->rowCount() > 0) {
 
 
     //Hämta värden från produktarrayen för att kunna skriva ut dem i orderbekräftelsen
-    $orderedProducts = ""; //fylls på med titel, antal och pris för varje produkt
+    $orderedProducts = "";
 
     foreach ($products as $key => $value) {
       $pOutlet = "";
@@ -71,6 +73,15 @@ if ($stmt->rowCount() > 0) {
       $orderedProducts .= "<br>";
     }
 
+    //Översätter statuskoderna till beskrivande text
+    if ($orderStatusId == 1) {
+      $orderStatus = "Ny";
+    } elseif ($orderStatusId == 2) {
+      $orderStatus = "Behandlas";
+    } elseif ($orderStatusId == 3) {
+      $orderStatus = "Slutförd";
+    };
+
     //Skapa en tabell med orderdetaljerna som hämtats från databasen
     $customersOrders .= "
         <tr class='table_orders-row'>
@@ -85,11 +96,12 @@ if ($stmt->rowCount() > 0) {
             <td class='table_orders-cell conf-cell products'> $orderedProducts </td>
             <td class='table_orders-cell conf-cell'> $totalPrice kr <br>
                                                     varav frakt: $freight kr</td>
+            <td class='table_orders-cell conf-cell'> $orderStatus</td>
         </tr>";
   }
   $customersOrders .= "</tbody></table>";
 
-  //Om kunden inte har några beställningar att visa
+  //Om kunden inte har gjort några beställningar än
 } else {
   $customersOrders = "<p>Du har inte lagt några beställningar än. Vill du börja handla nu?</p>";
 }
@@ -108,12 +120,13 @@ if ($stmt->rowCount() > 0) {
   </div>
   <br>
 
-  <p>
-    <a href='../index.php'><button type='button' class='form-container__submit-button'>Shoppa spel</button>
-      <br><br><br><br><a href='reset-password.php'><button type='button' class='form-container__submit-button'>Återställ lösenord</button>
-      </a>
-    </a>
-  </p>
+
+  <a href='../index.php'>
+    <button type='button' class='form-container__submit-button'>Shoppa spel</button><br><br><br><br>
+  </a>
+  <a href='reset-password.php'>
+    <button type='button' class='form-container__submit-button'>Återställ lösenord</button>
+  </a>
 
 </section>
 
