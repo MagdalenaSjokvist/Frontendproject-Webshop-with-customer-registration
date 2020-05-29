@@ -80,7 +80,7 @@ if ($stmt->rowCount() > 0) {
 
     //Översätter statuskoderna till text
     if ($orderStatusId == 1) {
-      $orderStatus = "Skickad";
+      $orderStatus = "Mottagen";
     } elseif ($orderStatusId == 2) {
       $orderStatus = "Behandlas";
     } elseif ($orderStatusId == 3) {
