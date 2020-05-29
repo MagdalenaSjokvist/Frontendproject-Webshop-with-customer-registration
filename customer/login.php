@@ -9,10 +9,6 @@ $storedEmail = "";
 $inputPassword = "";
 $storedPassword = "";
 
-//Om logga in-knappen har klickats på
-if (empty($_POST['submit'])) {
-  $errorMessage = "";
-}
 
 if (isset($_POST['submit'])) {
 
