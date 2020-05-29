@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (empty($_POST['email'])) {
     $errors[] = "Du måste ange en e-postadress";
   } else if (isset($_POST['email'])) {
+    $email = test_input($_POST['email']);
 
     //Kontrollerar om e-postadressen redan är registrerad (finns i databasen)
     $sql_c = "SELECT * FROM webshop_customers WHERE email = :email";
@@ -30,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt_c->rowCount() > 0) {
       $errors[] = "E-postadressen  " . $email . " finns redan registrerad";
-    } else {
-      $email = test_input($_POST['email']);
     }
   }
 

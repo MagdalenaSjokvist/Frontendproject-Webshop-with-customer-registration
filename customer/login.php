@@ -10,6 +10,10 @@ $inputPassword = "";
 $storedPassword = "";
 
 //Om logga in-knappen har klickats på
+if (empty($_POST['submit'])) {
+  $errorMessage = "";
+}
+
 if (isset($_POST['submit'])) {
 
   //Kollar om epost eller lösnord är ifyllt och visar felmeddelanden om något saknas
@@ -24,52 +28,51 @@ if (isset($_POST['submit'])) {
   } else {
     $inputEmail = $_POST['email'];
     $inputPassword = $_POST['password'];
-  }
 
-  //Hämtar kunduppgifter från databasen, utifrån inloggad e-postadress
-  $sql = "SELECT * FROM webshop_customers WHERE email=:email";
-  $stmt = $db->prepare($sql);
-  $stmt->bindParam(':email', $inputEmail);
-  $stmt->execute();
+    //Hämtar kunduppgifter från databasen, utifrån inloggad e-postadress
+    $sql = "SELECT * FROM webshop_customers WHERE email=:email";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':email', $inputEmail);
+    $stmt->execute();
 
-  //Kollar om e-postadressen finns i databasen 
-  if ($stmt->rowCount() > 0) {
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    //Kollar om e-postadressen finns i databasen 
+    if ($stmt->rowCount() > 0) {
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    //Hämta det lagrade lösenordet
-    $storedPassword = ($row['password']);
+      //Hämta det lagrade lösenordet
+      $storedPassword = ($row['password']);
 
-    //Kollar om det ifyllda lösenordet matchar det krypterade i databasen
-    if (password_verify($inputPassword, $storedPassword)) {
+      //Kollar om det ifyllda lösenordet matchar det krypterade i databasen
+      if (password_verify($inputPassword, $storedPassword)) {
 
-      //Hämta kundens uppgifter från databasen och spara i sessionsvariabler
-      $_SESSION["name"] = $row["name"];
-      $_SESSION["email"] = $row["email"];
-      $_SESSION["phone"] = $row["phone"];
-      $_SESSION["street"] = $row["street"];
-      $_SESSION["zip"] = $row["zip"];
-      $_SESSION["city"] = $row["city"];
+        //Hämta kundens uppgifter från databasen och spara i sessionsvariabler
+        $_SESSION["name"] = $row["name"];
+        $_SESSION["email"] = $row["email"];
+        $_SESSION["phone"] = $row["phone"];
+        $_SESSION["street"] = $row["street"];
+        $_SESSION["zip"] = $row["zip"];
+        $_SESSION["city"] = $row["city"];
 
-      //Skapa en sessionsvariabel som visar att någon är inloggad
-      $_SESSION["loggedin"] = true;
+        //Skapa en sessionsvariabel som visar att någon är inloggad
+        $_SESSION["loggedin"] = true;
 
-      // Redirect user to welcome page
-      header("location: welcome.php");
+        // Redirect user to welcome page
+        header("location: welcome.php");
+      } else {
+        // Visa felmeddelande om lösenordet inte matchar
+        $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
+      }
     } else {
-      // Visa felmeddelande om lösenordet inte matchar
-      $errorMessage = "<p class='error-message'>Ditt lösenord stämmer inte, prova igen!</p>";
+      //Visa felmeddelande om e-postadressen inte finns registrerad i databasen
+      $errorMessage = "<p class='error-message'>Din e-postadress verkar inte vara registrerad. Prova igen eller skapa ett nytt konto.</p>
+    </a>";
     }
-    //Visa felmeddelande om e-postadressen inte finns registrerad i databasen
   }
-} else {
-  $errorMessage = "<p class='error-message'>Din e-postadress verkar inte vara registrerad. Prova igen eller skapa ett nytt konto.</p>
-</a>";
 }
 ?>
 
 <section class="login-section">
-  <?php //print_r($_SESSION) 
-  ?>
+
   <form class="form-container" action="#" method="POST">
     <!-- <h1 class="login-title page-title login-container__title">Välkommen!</h1> -->
     <div class="form-container__heading">
