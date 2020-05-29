@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (empty($_POST['name'])) {
     $errors[] = "Du måste ange ditt namn";
   } else if (isset($_POST['name'])) {
-    $name = $_POST['name'];
+    $name = test_input($_POST['name']);
   }
 
   if (empty($_POST['email'])) {
